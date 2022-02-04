@@ -1,0 +1,16 @@
+export const SPLASH_SCREEN = 'splash';
+export const ROUTE_SIGNIN = 'signin';
+export const ROUTE_SIGNUP = 'signup';
+export const ROUTE_TASK='task'
+export const ROUTE_TASK_DETAILS='taskdetails'
+export const ROUTE_HOME="Home"
+export const WELCOME='welcome'
+export const ROUTE_MANDATORY_INFO='mandatory_info'
+export const ROUTE_NON_MANDATORY_INFO='non_mandatory_info'
+export const ROUTE_CONFIRMATION_IMAGE='confirmation_Image'
+export const VInsurance='VInsurance'
+export const VREGISTER='VREGISTER'
+export const WELCOMEZIP='WELCOMEZIP'
+export const Dlicense='Dlicense'
+export const ELigibility='ELigibility'
+export const Profile='Profile'
