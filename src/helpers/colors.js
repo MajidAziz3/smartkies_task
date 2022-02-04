@@ -1,9 +1,10 @@
 const DEFAULT_COLORS = {
     primary: '#5438FE',
-    background: '#ffffff',
+    background: '#E5E5E5',
     textColor: '#828282',
     textColor2:'#4F4F4F',
-    textGreen:'#5AC168'
+    textGreen:'#5AC168',
+    textBlack:'#333333'
   };
   
   
