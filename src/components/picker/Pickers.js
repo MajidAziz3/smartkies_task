@@ -1,15 +1,10 @@
 import React, {Children} from 'react';
 import {Text, TextInput, View} from 'react-native';
-import {Poppins} from '../../helpers/fontName';
-import {Scaling} from '../../helpers/scaling';
-
-const Input = ({
+import {Picker} from '@react-native-picker/picker';
+import { Scaling } from '../../helpers/scaling';
+import { Poppins } from '../../helpers/fontName';
+const Pickers = ({
   label,
-  value,
-  onChangeText,
-  placeholder,
-  secureTextEntry,
-  keyboardType,
   children,
   required
 }) => {
@@ -24,23 +19,11 @@ const Input = ({
           fontFamily: Poppins,
         }}>
         {label}
-        {required&&<Text style={{color:'red'}}>*</Text>}
       </Text>
       <View style={TextinputStyle}>
-        <TextInput
-          secureTextEntry={secureTextEntry}
-          placeholder={placeholder}
-          value={value}
-          onChangeText={onChangeText}
-          keyboardType={keyboardType}
-        />
-        <View
-          style={{
-            marginHorizontal: Scaling.horizontalScale(10),
-            marginVertical: Scaling.verticalScale(5),
-          }}>
-          {children}
-        </View>
+       {
+         children
+       }
       </View>
     </View>
   );
@@ -59,7 +42,7 @@ const styles = {
     borderWidth: Scaling.verticalScale(2),
     borderColor: '#E5E5E4',
     borderRadius: Scaling.verticalScale(5),
-    height: Scaling.verticalScale(45),
+    height: Scaling.verticalScale(75),
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -67,4 +50,4 @@ const styles = {
     // flex: 1,
   },
 };
-export default Input;
+export default Pickers;

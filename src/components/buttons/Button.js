@@ -7,7 +7,7 @@ import DEFAULT_COLORS from '../../helpers/colors';
 import { PoppinsSemiBold } from '../../helpers/fontName';
 import { Scaling } from '../../helpers/scaling';
 
-const Button = ({ onPress, children ,loader,color,width}) => {
+const Button = ({ onPress, children ,loader,color,width,gray}) => {
     return (
         <TouchableOpacity
             onPress={onPress}
@@ -31,7 +31,7 @@ const Button = ({ onPress, children ,loader,color,width}) => {
         fontSize: Scaling.verticalScale(16),
         fontWeight: '600',
         fontFamily:PoppinsSemiBold,
-        color:color?DEFAULT_COLORS.primary: '#ffffff',
+        color:color?gray?'#828282':DEFAULT_COLORS.primary: '#ffffff',
     }
                 }>
                 {

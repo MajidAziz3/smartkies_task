@@ -7,7 +7,7 @@ import {Images} from '../../assets/images';
 import Button from '../../components/buttons/Button';
 import { Scaling } from '../../helpers/scaling';
 import { PoppinsRegular } from '../../helpers/fontName';
-import { ROUTE_SIGNIN } from '../../helpers/RouteName';
+import { ACCOUNT_CREATION, ROUTE_SIGNIN } from '../../helpers/RouteName';
 
 export const OnBoarding = props => {
   return (
@@ -47,7 +47,7 @@ export const OnBoarding = props => {
       </View>
       <View
         style={{flex: 0.1,height:Scaling.verticalScale(125), flexDirection: 'row', justifyContent: 'space-evenly'}}>
-        <Button>Sign Up</Button>
+        <Button onPress={()=>props.navigation.navigate(ACCOUNT_CREATION)}>Sign Up</Button>
         <Button color={'#ffffff'} onPress={()=>props.navigation.navigate(ROUTE_SIGNIN)}>Login</Button>
       </View>
       <Text

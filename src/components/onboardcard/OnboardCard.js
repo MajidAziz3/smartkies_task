@@ -5,12 +5,12 @@ import DEFAULT_COLORS from "../../helpers/colors";
 import { PoppinsRegular, PoppinsSemiBold } from "../../helpers/fontName";
 import { Scaling } from "../../helpers/scaling";
 
-export const OnboardCard=({children,header,Description})=>{
+export const OnboardCard=({children,header,Description,intro})=>{
     return(
         <View style={{flex:1,
             height: Scaling.verticalScale(627),alignItems:'center'}}>
         <View style={{
-            marginTop:Scaling.verticalScale(23),
+            marginTop:Scaling.verticalScale(intro?0:23),
             height:Scaling.verticalScale(381),
             width:Scaling.horizontalScale(381),
         }}>
@@ -35,7 +35,7 @@ export const OnboardCard=({children,header,Description})=>{
         </View>
         <View
           style={{
-            marginTop:Scaling.verticalScale(20),
+            marginTop:Scaling.verticalScale(intro?-20:20),
             height: Scaling.verticalScale(68),
             width: Scaling.horizontalScale(341),
           }}>
