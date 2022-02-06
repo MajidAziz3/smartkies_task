@@ -5,7 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import Header from "../../../components/headers/Header";
 import { Scaling } from "../../../helpers/scaling";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import { ROUTE_SIGNIN } from "../../../helpers/RouteName";
+import { ROUTE_SIGNIN, SIGNUP_INTRO } from "../../../helpers/RouteName";
 import Button from "../../../components/buttons/Button";
 import DEFAULT_COLORS from "../../../helpers/colors";
 import { PoppinsBold, PoppinsRegular, PoppinsSemiBold } from "../../../helpers/fontName";
@@ -20,14 +20,13 @@ export const Finish=props=>{
         }
       };
       const config = {
-        velocityThreshold: 0.3,
-        directionalOffsetThreshold: 80,
+        velocityThreshold: 0.1,
+        directionalOffsetThreshold: 10,
       };
     return(
         <View style={{flex:1}}>
         <Header
-        onPress={() => props.navigation.goBack()}
-        left={105}
+        left={155}
         headerText={'Success'}>
         <Entypo
           style={{
@@ -68,7 +67,7 @@ export const Finish=props=>{
             {'The first step has been performed successfully. To go to the next stage, click the button below.'}
           </Text>
        <GestureRecognizer
-                onSwipeRight={()=>props.navigation.navigate(ROUTE_SIGNIN)}
+                onSwipeRight={()=>props.navigation.navigate(SIGNUP_INTRO)}
                 onSwipe={(direction, state) => onSwipe(direction, state)}
                 config={config}
                 style={{

@@ -21,7 +21,7 @@ const Header = ({onPress, headerText, left, children}) => {
       }}>
       {headerText ? (
         <View style={{flex: 0.7, flexDirection: 'row'}}>
-          <Entypo
+         {onPress&& <Entypo
             name="chevron-small-left"
             style={{
               marginLeft: headerText ? Scaling.verticalScale(16) : 0,
@@ -29,7 +29,7 @@ const Header = ({onPress, headerText, left, children}) => {
             size={30}
             onPress={onPress}
             color={'#5438FE'}
-          />
+          />}
           <Text
             style={{
               textAlign: 'center',

@@ -7,7 +7,7 @@ import DEFAULT_COLORS from '../../helpers/colors';
 import { PoppinsSemiBold } from '../../helpers/fontName';
 import { Scaling } from '../../helpers/scaling';
 
-const Button = ({ onPress, children ,loader,color,width,gray}) => {
+const Button = ({ onPress, children ,loader,color,width,gray,border}) => {
     return (
         <TouchableOpacity
             onPress={onPress}
@@ -17,6 +17,7 @@ const Button = ({ onPress, children ,loader,color,width,gray}) => {
         borderRadius:Scaling.verticalScale(5),
         backgroundColor:color?color:DEFAULT_COLORS.primary,
         height:Scaling.verticalScale(48),
+        borderWidth: border?1:0,
         width:width?width:Scaling.horizontalScale(148),
         marginHorizontal: 5,justifyContent:'center',alignItems:'center'
     }

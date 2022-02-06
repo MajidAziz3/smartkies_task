@@ -13,6 +13,7 @@ export const OnboardCard=({children,header,Description,intro})=>{
             marginTop:Scaling.verticalScale(intro?0:23),
             height:Scaling.verticalScale(381),
             width:Scaling.horizontalScale(381),
+            justifyContent:'center',alignItems:'center'
         }}>
             {children}
         </View>
@@ -36,10 +37,10 @@ export const OnboardCard=({children,header,Description,intro})=>{
         <View
           style={{
             marginTop:Scaling.verticalScale(intro?-20:20),
-            height: Scaling.verticalScale(68),
             width: Scaling.horizontalScale(341),
           }}>
           <Text
+          numberOfLines={6}
             style={{
               textAlign: 'center',
               fontSize: Scaling.verticalScale(16),
