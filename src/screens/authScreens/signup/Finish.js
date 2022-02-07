@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { View,Text } from "react-native";
+import { View,Text, Image } from "react-native";
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Header from "../../../components/headers/Header";
@@ -24,7 +24,7 @@ export const Finish=props=>{
         directionalOffsetThreshold: 10,
       };
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,backgroundColor:'#ffffff'}}>
         <Header
         left={155}
         headerText={'Success'}>
@@ -38,6 +38,9 @@ export const Finish=props=>{
           color={'#828282'}
         />
       </Header>
+      <View style={{flex:1,justifyContent:'center',alignItems:'center',marginTop:Scaling.verticalScale(50)}}>
+        <Image source={require('../../../assets/images/celeb.gif')} style={{height:Scaling.verticalScale(200),width:Scaling.horizontalScale(240)}} />
+      </View>
       <View
         style={{
           flex: 1,

@@ -1,9 +1,9 @@
 import Toast from 'react-native-simple-toast'
 import MyStorage from '../helpers/MyStorage';
+import { useSelector } from 'react-redux';
 
 const _TIMEOUT = 15000;
-let BASE_URL = "https://bxbc/api/v1/";
-
+let BASE_URL = "https://new.smartkies.com/api/";
 let ONLINE_STATUS = true;
 
 
@@ -94,8 +94,11 @@ const Signup = async (body) => {
   return sendPostRequest(url, body);
 
 }
-
+const GetToken=async(uri)=>{
+  const url=uri
+  return sendGetRequest(url)
+}
 
 export {
-  Signup
+  Signup,GetToken
 };

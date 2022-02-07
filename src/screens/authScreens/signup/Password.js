@@ -9,15 +9,44 @@ import Input from "../../../components/inputs/Input";
 import Button from "../../../components/buttons/Button";
 import CheckBox from '@react-native-community/checkbox';
 import { VERIFYMAIL } from "../../../helpers/RouteName";
+import {GetToken, Signup} from '../../../services/ApiManager'
+import {useDispatch,useSelector} from 'react-redux';
+import { setApplicantId } from "../../../redux/actions/ApplicantId";
+import { setOnfidoId } from "../../../redux/actions/OnfidoApplicantId";
+import { setToken } from "../../../redux/actions/TOken";
 
 export const Password=(props)=>{
     const [password, setPassword] = useState('');
-    const [passwordShow, setPasswordShow] = useState(true);
+    const [passwordShow,setPasswordShow]=useState(true)
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [toggleCheckBox, setToggleCheckBox] = useState(false);
-    
+    const [loader,setLoader]=useState(false)
+    const dispatch=useDispatch()
     const [toggleCheckBox1, setToggleCheckBox1] = useState(true);
     const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
     const [toggleCheckBox3, setToggleCheckBox3] = useState(false);
+    console.log(props.route.params)
+    const register=async()=>{
+      setLoader(true)
+      let body={
+        "first_name": props.route.params.first_name,
+        "last_name": props.route.params.last_name,
+        "email": props.route.params.email,
+        "passwrod": password,
+        "password_confirmation": passwordConfirmation,
+        "date_of_birth": props.route.params.date_of_birth,
+        "phone_number": props.route.params.phone_number,
+        "gender": "male",
+        "country_id": "1"
+      }
+      await Signup(body).then((response) => response.json()).then(async text =>{
+        dispatch(setApplicantId(text.data.id))
+        dispatch(setOnfidoId(text.data.onfido_applicant_id))
+        props.navigation.navigate(VERIFYMAIL)
+        await GetToken(`users/${text.data.id}/generate_sdk`).then((response) => response.json()).then(async text =>dispatch(setToken(text.data.sdk_token))).catch(err=>console.log(err))
+        setLoader(false)
+      }).catch(err=>console.log(err))
+    }
     return(
         <View style={{flex:1}}>
 <Header
@@ -79,8 +108,8 @@ export const Password=(props)=>{
         </Text>
         <Input
           placeholder={'*** *** **'}
-          value={password}
-          onChangeText={text => setPassword(text)}
+          value={passwordConfirmation}
+          onChangeText={text => setPasswordConfirmation(text)}
           secureTextEntry={passwordShow}
           label={'Confirm Password'}/>
           <Text
@@ -171,7 +200,8 @@ export const Password=(props)=>{
           </Text>
         </View>
         <Button
-          onPress={() => props.navigation.navigate(VERIFYMAIL)}
+        loader={loader}
+          onPress={() =>register()} // props.navigation.navigate(VERIFYMAIL)
           width={Scaling.horizontalScale(382)}>
           Continue
         </Button>

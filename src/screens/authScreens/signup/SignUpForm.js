@@ -17,7 +17,6 @@ export const SignUpForm = props => {
     const [last_name, setLastName] = useState('');
     const [sur_name, setSurName] = useState('');
     const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [value, setValue] = useState("");
   const [formattedValue, setFormattedValue] = useState("");
   const phoneInput = useRef(null);
@@ -25,6 +24,7 @@ export const SignUpForm = props => {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [showdate, setShowDate] = useState(false);
+  const [dob,setDob]=useState('')
 
   var dat = new Date();
 
@@ -32,6 +32,9 @@ export const SignUpForm = props => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setShowDate(true)
+    setDob(`${moment(currentDate).format(
+      'yyyy-MM-DD',
+    )}`)
     setDate(currentDate);
   };
 
@@ -109,8 +112,16 @@ export const SignUpForm = props => {
         value={email}
         onChangeText={(text)=>setEmail(text)}
         placeholder={'Test '}
+        /> 
+        <Input
+        label={'Phone Number'}
+        required
+        value={value}
+        keyboardType={'numeric'}
+        onChangeText={(text)=>setValue(text)}
+        placeholder={'08888888888 '}
         />
-        <Text
+        {/* <Text
         style={{
           fontSize: Scaling.verticalScale(16),
           fontWeight: '500',
@@ -121,29 +132,29 @@ export const SignUpForm = props => {
         <Text style={{color:'red'}}>*</Text>
       </Text>
         <View style={ {
-    lineHeight: 23,
     color: '#000',
     borderWidth: Scaling.verticalScale(2),
     borderColor: '#E5E5E4',
     borderRadius: Scaling.verticalScale(5),
-    height: Scaling.verticalScale(56),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    height: Scaling.verticalScale(78),
+    
   }}>
         <PhoneInput
             ref={phoneInput}
-            defaultValue={value}
+            defaultValue={formattedValue}
             defaultCode="DM"
             containerStyle={{flex:1}}
             layout="first"
             onChangeText={(text) => {
+              console.log('test',text)
               setValue(text);
             }}
             onChangeFormattedText={(text) => {
+              console.log('test33',text)
               setFormattedValue(text);
             }}
           />
-          </View> 
+          </View>  */}
            <Text
         style={{
           fontSize: Scaling.verticalScale(16),
@@ -200,7 +211,7 @@ export const SignUpForm = props => {
           marginBottom: Scaling.verticalScale(15),
         }}>
         <Button
-          onPress={() => props.navigation.navigate(OTP_SCREEN)}
+          onPress={() => props.navigation.navigate(OTP_SCREEN,{first_name:first_name,last_name:last_name,sur_name:sur_name,date_of_birth:dob,email:email,phone_number:value})}
           width={Scaling.horizontalScale(382)}>
           Continue
         </Button>

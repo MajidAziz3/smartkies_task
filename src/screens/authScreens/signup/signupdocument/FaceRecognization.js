@@ -9,6 +9,12 @@ import {useDispatch,useSelector} from 'react-redux';
 import { setImagesArray } from '../../../../redux/actions/ImageArray';
 import { SHOWIMAGES } from '../../../../helpers/RouteName';
 import CameraRoll from "@react-native-community/cameraroll";
+import {
+  Onfido,
+  OnfidoCaptureType,
+  OnfidoCountryCode,
+  OnfidoDocumentType,
+} from '@onfido/react-native-sdk';
 
 export const FaceRecognization = props => {
   const {height, width} = Dimensions.get('window');
@@ -36,7 +42,7 @@ export const FaceRecognization = props => {
  useEffect(()=>{
      hasAndroidPermission()
  },[])
-
+ 
   const takePicture = async () => {
       let arr=state
     try {
@@ -117,7 +123,7 @@ export const FaceRecognization = props => {
             }}>
             {state.length==0?'Front Side':'Back Side'}
           </Text>
-          <TouchableOpacity onPress={()=>takePicture()}>
+          <TouchableOpacity onPress={()=>startSDK()}>
             <Images.CaptureBtn />
             </TouchableOpacity>
             </View>

@@ -142,7 +142,7 @@ export const OtpScreen = props => {
           marginBottom: Scaling.verticalScale(15),
         }}>
         <Button
-          onPress={() => props.navigation.navigate(PASSWORD)}
+          onPress={() => props.navigation.navigate(PASSWORD,{...props.route.params})}
           width={Scaling.horizontalScale(382)}>
           Continue
         </Button>

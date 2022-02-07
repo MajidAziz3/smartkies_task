@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text } from "react-native";
+import { View,Text,Image } from "react-native";
 import Header from "../../../components/headers/Header";
 import { Scaling } from "../../../helpers/scaling";
 import Entypo from 'react-native-vector-icons/Entypo'
@@ -28,8 +28,8 @@ export const NotVerifiedEmail=props=>{
         />
       </Header>
       <View style={{height:Scaling.verticalScale(650),justifyContent:'center',alignItems:'center'}}>
-          <Images.Email/>
-          <View
+      <Image style={{height:Scaling.verticalScale(225),width:Scaling.horizontalScale(260)}} source={require('../../../assets/images/email.gif')} />
+         <View
           style={{
             marginTop:Scaling.verticalScale(20),
             height: Scaling.verticalScale(50),

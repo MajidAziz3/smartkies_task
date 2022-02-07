@@ -4,7 +4,7 @@ import Slide3 from './slide3.svg';
 import VerifyIdentity from './verify_identity.svg';
 import VideoImage from './videos_image.svg';
 import Intro from './intro.svg';
-import Email from './email.svg';
+import Email from './email.gif';
 import PlayIcon from './play_icon.svg';
 import Back from './back.svg';
 import CaptureBtn from './capturebtn.svg';

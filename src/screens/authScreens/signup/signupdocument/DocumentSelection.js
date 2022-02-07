@@ -6,6 +6,12 @@ import {
   PoppinsRegular,
   PoppinsSemiBold,
 } from '../../../../helpers/fontName';
+import {
+  Onfido,
+  OnfidoCaptureType,
+  OnfidoCountryCode,
+  OnfidoDocumentType,
+} from '@onfido/react-native-sdk';
 import {Scaling} from '../../../../helpers/scaling';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -14,8 +20,48 @@ import Header from '../../../../components/headers/Header';
 import DEFAULT_COLORS from '../../../../helpers/colors';
 import { DocumentCard } from '../../../../components/cards/DocumentCard';
 import { CAMERASCAN } from '../../../../helpers/RouteName';
+import { useSelector } from 'react-redux';
 
 export const DocumentSelection = props => {
+  const state=useSelector(state=>state)
+  const startSDK=(doctype)=> {
+    Onfido.start({
+      sdkToken: state.token.data,
+      flowSteps: {
+        welcome: true,
+        captureFace: {
+          type: OnfidoCaptureType.PHOTO,
+        },
+        captureDocument: {
+          docType: doctype=='passport'? OnfidoDocumentType.PASSPORT:doctype=='driving_License'? OnfidoDocumentType.DRIVING_LICENSE:doctype=='id'? OnfidoDocumentType.NATIONAL_IDENTITY_CARD:OnfidoDocumentType.RESIDENCE_PERMIT,
+          countryCode: OnfidoCountryCode.ARE,
+        },
+      },
+    })
+      .then(res =>{ console.log('OnfidoSDK: Success:', JSON.stringify(res))
+      var myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${state.token.data}`);
+
+var formdata = new FormData();
+formdata.append("applicant_id", state.applicantId.data);
+formdata.append("report_names", "[document,facial_similarity_photo]");
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("https://api.eu.onfido.com/v3/checks", requestOptions)
+  .then(response => response.json())
+  .then(result => alert(result.Message))
+  .catch(error => console.log('error', error));
+    })
+      .catch(err => console.log('OnfidoSDK: Error:', err.code, err.message));
+  }
+
+
   return (
     <View style={{flex: 1}}>
        <Header
@@ -54,16 +100,16 @@ export const DocumentSelection = props => {
           Try to upload genuine documents so that you don't face issues when registering an account with us.
         </Text>
         <View style={{marginTop:Scaling.verticalScale(19)}}>
-<DocumentCard onPress={()=>props.navigation.navigate(CAMERASCAN)} text="Passport">
+<DocumentCard onPress={()=>startSDK('passport')} text="Passport">
     <Fontisto name={'passport-alt'} size={25} color={'#ffffff'}/>
 </DocumentCard>
-<DocumentCard onPress={()=>props.navigation.navigate(CAMERASCAN)} text="Driving License">
+<DocumentCard onPress={()=>startSDK('drivingLicense')} text="Driving License">
     <FontAwesome name={'drivers-license-o'} size={25} color={'#ffffff'}/>
 </DocumentCard>
-<DocumentCard onPress={()=>props.navigation.navigate(CAMERASCAN)} text="Identity Card">
+<DocumentCard onPress={()=>startSDK('id')} text="Identity Card">
     <FontAwesome name={'id-card-o'} size={25} color={'#ffffff'}/>
 </DocumentCard>
-<DocumentCard onPress={()=>props.navigation.navigate(CAMERASCAN)} text="Residence Permit">
+<DocumentCard onPress={()=>startSDK('residancePermit')} text="Residence Permit">
     <Fontisto name={'home'} size={25} color={'#ffffff'}/>
 </DocumentCard>
        </View>
